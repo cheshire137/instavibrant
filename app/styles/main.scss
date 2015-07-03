@@ -138,6 +138,17 @@ main {
   }
 }
 
+.pagination-wrapper {
+  .previous-page-link {
+    margin-right: 10px;
+  }
+
+  .next-page-link {
+    float: right;
+    margin-left: 10px;
+  }
+}
+
 .clearfix:after {
   visibility: hidden;
   display: block;

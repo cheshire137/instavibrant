@@ -79,7 +79,7 @@ var InstagramData = React.createClass({
                 return <ImageListItem key={'image-' + image.id} image={image} />;
               })}
             </ul>
-            <p className="pagination-wrapper">
+            <p className="pagination-wrapper clearfix">
               {this.state.previousUrls.length > 0 ? (
                 <a href="#" onClick={this.loadPreviousPage} className="previous-page-link">Previous Page</a>
               ) : ''}
