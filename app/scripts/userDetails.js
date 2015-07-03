@@ -72,7 +72,7 @@ var UserDetails = React.createClass({
             <a href="#!" data-activates="follows-dropdown" className="dropdown-button name-and-avatar cyan-text text-darken-2" target="_blank">
               <img src={this.state.user.profile_picture} alt={this.state.user.username} className="avatar"/>
               <span className="name">{name}</span>
-              <i className="material-icons right"></i>
+              <i className="mdi-navigation-arrow-drop-down right"></i>
             </a>
           </li>
           <li className="logout-list-item">

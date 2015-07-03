@@ -3,7 +3,7 @@ $icons-font-path: "../fonts/";
 @import "materialize/sass/materialize";
 
 $avatar-height: 30px;
-$color-transition: color 0.2s ease-in-out;
+$color-transition: color 0.1s ease-in-out;
 $image-padding: 20px;
 $image-width: 150px;
 $swatch-height: 50px;
@@ -78,6 +78,11 @@ body {
       margin-left: 10px;
       display: inline-block;
     }
+
+    i.right {
+      margin-left: 10px;
+      font-size: 1.75rem;
+    }
   }
 }
 
@@ -112,10 +117,31 @@ main {
 
       .image-details {
         margin-left: $image-width + $image-padding;
-        padding-top: $image-padding;
+        padding-top: 17px;
 
         .caption {
           margin-top: 0;
+        }
+
+        .image-options {
+          margin-top: 6px;
+          font-size: 0.9rem;
+
+          a {
+            &, &:link, &:visited, &:active {
+              color: #888;
+            }
+
+            &:hover, &:focus {
+              color: color('teal', 'lighten-1');
+            }
+
+            &.create-palette-link {
+              i {
+                margin-right: 5px;
+              }
+            }
+          }
         }
 
         .swatches-list {
