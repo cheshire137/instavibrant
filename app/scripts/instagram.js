@@ -26,11 +26,36 @@ var Instagram = (function() {
     getFeed: function() {
       return this.getJSON('/users/self/feed');
     },
-    getRecent: function(userId) {
+    getRecent: function(url, userId) {
       if (typeof userId === 'undefined') {
         userId = 'self';
       }
-      return this.getJSON('/users/' + userId + '/media/recent');
+      if (!url || typeof url === 'undefined') {
+        url = '/users/' + userId + '/media/recent';
+      }
+      return $.Deferred(function(defer) {
+        var onSuccess = function(response, textStatus, request) {
+          response.pagination = response.pagination || {};
+          response.pagination.current_url = url;
+          defer.resolve(response);
+        };
+        this.getJSON(url).success(onSuccess).error(defer.reject);
+      }.bind(this)).promise();
+    },
+    getRecentImages: function(url, userId) {
+      return $.Deferred(function(defer) {
+        var onSuccess = function(response, textStatus, request) {
+          var images = [];
+          for (var i=0; i<response.data.length; i++) {
+            var obj = response.data[i];
+            if (obj.type === 'image') {
+              images.push(obj);
+            }
+          }
+          defer.resolve({data: images, pagination: response.pagination});
+        };
+        this.getRecent(url, userId).then(onSuccess, defer.reject);
+      }.bind(this)).promise();
     },
     getUser: function(userId) {
       if (typeof userId === 'undefined') {

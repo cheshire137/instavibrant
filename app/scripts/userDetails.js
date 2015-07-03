@@ -1,12 +1,14 @@
 'use strict';
 var Instagram = require('./instagram'),
-    React = require('react');
+    React = require('react'),
+    LocalStorage = require('./localStorage');
 var UserDetails = React.createClass({
   getInitialState: function() {
     return {user: {}};
   },
   componentDidMount: function() {
     Instagram.getUser().then(function(userData) {
+      LocalStorage.set('user', userData.data.username);
       this.setState({user: userData.data});
     }.bind(this), function() {
       console.error('failed to fetch Instagram user details');
