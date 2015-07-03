@@ -12,16 +12,9 @@ var InstagramData = React.createClass({
     options = options || {};
     var url = options.url;
     var previousUrl = options.previousUrl;
-    var userID = options.userID;
     var onSuccess = function(response) {
       console.log('loaded', response.data.length, 'images');
-      var previousUrls;
-      if (userID && !this.state.userID) {
-        console.log('switched users, wiping page history');
-        previousUrls = [];
-      } else {
-        previousUrls = this.state.previousUrls;
-      }
+      var previousUrls = this.state.previousUrls;
       if (previousUrls.length > 0) {
         var lastUrl = previousUrls[previousUrls.length - 1];
         if (lastUrl === url) {
@@ -43,11 +36,10 @@ var InstagramData = React.createClass({
       this.setState({images: response.data,
                      currentUrl: response.pagination.current_url,
                      nextUrl: response.pagination.next_url,
-                     previousUrls: previousUrls,
-                     userID: userID});
+                     previousUrls: previousUrls});
       window.scrollTo(0, 0);
     }.bind(this);
-    Instagram.getRecentImages(url, userID).then(onSuccess, function() {
+    Instagram.getRecentImages(url, options.userID).then(onSuccess, function() {
       console.error('failed to fetch images from Instagram');
     });
   },
@@ -56,6 +48,7 @@ var InstagramData = React.createClass({
   },
   loadPreviousPage: function(e) {
     e.preventDefault();
+    this.setState({images: []});
     var urls = this.state.previousUrls;
     if (urls.length > 0) {
       var newUrl = urls[urls.length - 1];
@@ -70,20 +63,25 @@ var InstagramData = React.createClass({
   },
   loadNextPage: function(e) {
     e.preventDefault();
+    this.setState({images: []});
     this.fetchImages({url: this.state.nextUrl,
                       previousUrl: this.state.currentUrl});
   },
-  onUserChange: function(userID) {
-    console.log('loading user ID', userID);
+  onUserChange: function(userID, userName) {
+    console.log('loading user ID', userID, userName, 'wiping page history');
+    this.setState({userName: userName, images: [], previousUrls: [],
+                   userID: userID});
     this.fetchImages({userID: userID});
   },
   render: function() {
+    var otherUserLoaded = this.state.userName && this.state.userID &&
+        this.state.userID !== 'self';
     return (
       <div>
         <nav>
           <div className="nav-wrapper cyan lighten-5">
             <a href="/#/" className="brand-logo center cyan-text text-darken-2">
-              Instavibrant
+              {otherUserLoaded ? 'Instavibrant: ' + this.state.userName : 'Instavibrant'}
             </a>
             <UserDetails currentUserID={this.state.userID} onUserChange={this.onUserChange} />
           </div>

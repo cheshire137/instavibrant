@@ -29,8 +29,10 @@ var UserDetails = React.createClass({
   },
   onFollowClick: function(e) {
     e.preventDefault();
-    var username = $(e.target).attr('data-id');
-    this.props.onUserChange(username);
+    var link = $(e.target);
+    var userID = link.attr('data-id');
+    var name = link.text();
+    this.props.onUserChange(userID, name);
   },
   render: function() {
     var name = this.state.user.full_name;
