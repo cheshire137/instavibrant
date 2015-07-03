@@ -20,6 +20,7 @@
     "gulp-webserver": "latest",
     "jest-cli": "latest",
     "react": "latest",
+    "react-router": "^0.13.3",
     "react-tools": "latest",
     "reactify": "latest",
     "watchify": "~2.1",
