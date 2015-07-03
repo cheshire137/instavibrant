@@ -10165,6 +10165,9 @@ main {
 .images-list-wrapper .images-list .image-list-item .image-details .image-options a.create-palette-link i {
   margin-right: 5px;
 }
+.images-list-wrapper .images-list .image-list-item .image-details .swatches-list {
+  font-weight: 300;
+}
 .images-list-wrapper .images-list .image-list-item .image-details .swatches-list .swatch-list-item {
   width: 19%;
   display: inline-block;
@@ -10195,15 +10198,15 @@ main {
 .page-footer {
   font-weight: 300;
 }
+.page-footer a:hover, .page-footer a:focus {
+  text-decoration: underline;
+}
 .page-footer ul {
   margin-top: 0;
 }
 .page-footer ul li {
   list-style: none;
   display: inline-block;
-}
-.page-footer ul li a:hover, .page-footer ul li a:focus {
-  text-decoration: underline;
 }
 .page-footer ul li + li {
   margin-left: 1em;

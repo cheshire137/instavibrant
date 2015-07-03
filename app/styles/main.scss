@@ -145,6 +145,8 @@ main {
         }
 
         .swatches-list {
+          font-weight: 300;
+
           .swatch-list-item {
             width: 19%;
             display: inline-block;
@@ -184,18 +186,18 @@ main {
 .page-footer {
   font-weight: 300;
 
+  a {
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+
   ul {
     margin-top: 0;
 
     li {
       list-style: none;
       display: inline-block;
-
-      a {
-        &:hover, &:focus {
-          text-decoration: underline;
-        }
-      }
 
       & + li {
         margin-left: 1em;
