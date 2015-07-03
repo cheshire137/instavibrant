@@ -72,7 +72,7 @@ main {
   .images-list {
     .image-list-item {
       list-style: none;
-      margin-top: 1em;
+      margin-top: 20px;
 
       .image-link {
         display: block;
@@ -90,14 +90,30 @@ main {
         margin-left: $image-width + $image-padding;
 
         .swatches-list {
+          display: table;
+          width: 100%;
+
           .swatch-list-item {
-            width: 20%;
-            display: inline-block;
+            width: 19%;
+            display: table-cell;
 
             .swatch {
-              display: inline-block;
               width: 100%;
               height: 50px;
+              line-height: 50px;
+              text-align: center;
+
+              &.dark {
+                color: #F0F0F0;
+              }
+
+              &.light {
+                color: #333;
+              }
+            }
+
+            & + .swatch-list-item {
+              padding-left: 1%;
             }
           }
         }
