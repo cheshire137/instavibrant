@@ -38,6 +38,10 @@ options '/image' do
 end
 
 get '/image' do
+  allowed_uri = URI.parse(ENV['FRONT_END_URI'])
+  unless request.host == allowed_uri.host
+    return "#{request.host} is not allowed to use this endpoint"
+  end
   url = params[:url] || ''
   unless url.start_with?('http://') || url.start_with?('https://')
     return 'Invalid URL'
