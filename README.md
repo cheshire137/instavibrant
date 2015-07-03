@@ -1,5 +1,7 @@
 # Instavibrant
 
+![Screenshot](https://raw.githubusercontent.com/moneypenny/instavibrant/master/screenshot.png)
+
 ## How to Run Locally
 
 [Register an Instagram client](https://instagram.com/developer/clients/register/).
