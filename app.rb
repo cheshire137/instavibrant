@@ -21,8 +21,7 @@ get '/' do
   send_file File.join(settings.public_folder, 'index.html')
 end
 
-# For Heroku where the API URL and front end URL are the same
-get '/scripts/config.json' do
+get '/config.json' do
   content_type 'application/json'
   {
     localStorageKey: ENV['LOCAL_STORAGE_KEY'],

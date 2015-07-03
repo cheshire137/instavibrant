@@ -45,7 +45,7 @@ Router.run(routes, function(Handler) {
   if (window.Config) {
     onConfigLoaded();
   } else {
-    $.get('scripts/config.json', function(Config) {
+    $.get('config.json', function(Config) {
       window.Config = Config;
       console.log('loaded config', window.Config);
       onConfigLoaded();
