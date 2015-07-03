@@ -18,13 +18,13 @@ var UserDetails = React.createClass({
     return (
       <ul className="user-details right">
         <li className="instagram-user">
-          <a href={url} className="name-and-avatar" target="_blank">
+          <a href={url} className="name-and-avatar cyan-text text-darken-2" target="_blank">
             <img src={this.state.user.profile_picture} alt={this.state.user.username} className="avatar"/>
             <span className="name">{this.state.user.full_name}</span>
           </a>
         </li>
         <li className="logout-list-item">
-          <a href="/#/logout" className="logout-link">Log Out</a>
+          <a href="/#/logout" className="logout-link cyan-text text-darken-2">Log Out</a>
         </li>
       </ul>
     );

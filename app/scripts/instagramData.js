@@ -20,9 +20,7 @@ var InstagramData = React.createClass({
     var imageListItems = [];
     for (var i=0; i<this.state.images.length; i++) {
       var image = this.state.images[i];
-      console.log('image', image);
       var key = 'image-' + image.id;
-      console.log('key', key);
       imageListItems.push(<ImageListItem key={key} image={image} />);
     }
     return (
@@ -35,13 +33,15 @@ var InstagramData = React.createClass({
             <UserDetails />
           </div>
         </nav>
-        <div className="images-list-wrapper">
-          <ul className="images-list">
-            {imageListItems}
-          </ul>
-          <p className="next-page-wrapper">
-            <a href="/#/instagram/next" className="next-page-link">Next Page</a>
-          </p>
+        <div className="container">
+          <div className="images-list-wrapper">
+            <ul className="images-list">
+              {imageListItems}
+            </ul>
+            <p className="next-page-wrapper">
+              <a href="/#/instagram/next" className="next-page-link">Next Page</a>
+            </p>
+          </div>
         </div>
       </div>
     );
