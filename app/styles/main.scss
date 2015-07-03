@@ -2,9 +2,10 @@ $roboto-font-path: "../fonts/";
 $icons-font-path: "../fonts/";
 @import "materialize/sass/materialize";
 
-$image-padding: 10px;
 $avatar-height: 30px;
 $color-transition: color 0.2s ease-in-out;
+$image-padding: 10px;
+$image-width: 150px;
 
 a {
   -webkit-transition: $color-transition;
@@ -70,15 +71,35 @@ main {
 .images-list-wrapper {
   .images-list {
     .image-list-item {
-      display: inline-block;
       list-style: none;
-      margin: $image-padding 0 0 $image-padding;
+      margin-top: 1em;
 
       .image-link {
         display: block;
+        float: left;
+        margin-right: $image-padding;
 
         .thumbnail {
           border-radius: 2px;
+          width: $image-width;
+          height: $image-width;
+        }
+      }
+
+      .image-details {
+        margin-left: $image-width + $image-padding;
+
+        .swatches-list {
+          .swatch-list-item {
+            width: 20%;
+            display: inline-block;
+
+            .swatch {
+              display: inline-block;
+              width: 100%;
+              height: 50px;
+            }
+          }
         }
       }
     }

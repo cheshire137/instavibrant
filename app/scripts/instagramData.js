@@ -10,6 +10,7 @@ var InstagramData = React.createClass({
   componentWillMount: function() {
     Instagram.getRecent().then(function(imageData) {
       console.log('loaded', imageData.data.length, 'images');
+      console.log(imageData.data[0]);
       this.setState({images: imageData.data,
                      nextUrl: imageData.pagination.next_url});
     }.bind(this), function() {
