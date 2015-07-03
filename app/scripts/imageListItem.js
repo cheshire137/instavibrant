@@ -29,7 +29,7 @@ var ImageListItem = React.createClass({
     var thumbnail = this.props.image.images.thumbnail;
     var url = window.Config.serverUrl + '/image?url=' +
               encodeURIComponent(thumbnail.url);
-    var caption = this.props.image.caption.text;
+    var caption = this.props.image.caption ? this.props.image.caption.text : '';
     return (
       <li className="image-list-item clearfix">
         <a href={this.props.image.link} target="_blank" className="image-link">
