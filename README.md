@@ -8,7 +8,8 @@
 
 Update app/scripts/config.json with your Instagram client's details.
 
+    bundle install
     npm install
-    gulp watch
+    foreman start -f Procfile.dev
 
 Visit [localhost:3001](http://localhost:3001/) in your browser.
