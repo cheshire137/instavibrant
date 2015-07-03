@@ -4,7 +4,7 @@
 
 ## How to Run Locally
 
-[Register an Instagram client](https://instagram.com/developer/clients/register/).
+[Register an Instagram client](https://instagram.com/developer/clients/register/). Set your redirect URI to `http://localhost:5000`.
 
     cp env.sh.example env.sh
 

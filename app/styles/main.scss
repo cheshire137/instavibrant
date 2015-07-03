@@ -182,8 +182,25 @@ main {
 }
 
 .page-footer {
+  font-weight: 300;
+
   ul {
     margin-top: 0;
+
+    li {
+      list-style: none;
+      display: inline-block;
+
+      a {
+        &:hover, &:focus {
+          text-decoration: underline;
+        }
+      }
+
+      & + li {
+        margin-left: 1em;
+      }
+    }
   }
 }
 

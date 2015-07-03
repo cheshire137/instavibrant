@@ -10192,8 +10192,21 @@ main {
   padding-left: 1%;
 }
 
+.page-footer {
+  font-weight: 300;
+}
 .page-footer ul {
   margin-top: 0;
+}
+.page-footer ul li {
+  list-style: none;
+  display: inline-block;
+}
+.page-footer ul li a:hover, .page-footer ul li a:focus {
+  text-decoration: underline;
+}
+.page-footer ul li + li {
+  margin-left: 1em;
 }
 
 .pagination-wrapper .previous-page-link {
