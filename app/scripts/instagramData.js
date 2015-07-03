@@ -8,11 +8,20 @@ var InstagramData = React.createClass({
   getInitialState: function() {
     return {images: [], previousUrls: []};
   },
-  fetchImages: function(url, previousUrl) {
-    Instagram.getRecentImages(url).then(function(response) {
+  fetchImages: function(options) {
+    options = options || {};
+    var url = options.url;
+    var previousUrl = options.previousUrl;
+    var userID = options.userID;
+    var onSuccess = function(response) {
       console.log('loaded', response.data.length, 'images');
-      console.log('sample image', response.data[0]);
-      var previousUrls = this.state.previousUrls;
+      var previousUrls;
+      if (userID && !this.state.userID) {
+        console.log('switched users, wiping page history');
+        previousUrls = [];
+      } else {
+        previousUrls = this.state.previousUrls;
+      }
       if (previousUrls.length > 0) {
         var lastUrl = previousUrls[previousUrls.length - 1];
         if (lastUrl === url) {
@@ -34,9 +43,11 @@ var InstagramData = React.createClass({
       this.setState({images: response.data,
                      currentUrl: response.pagination.current_url,
                      nextUrl: response.pagination.next_url,
-                     previousUrls: previousUrls});
+                     previousUrls: previousUrls,
+                     userID: userID});
       window.scrollTo(0, 0);
-    }.bind(this), function() {
+    }.bind(this);
+    Instagram.getRecentImages(url, userID).then(onSuccess, function() {
       console.error('failed to fetch images from Instagram');
     });
   },
@@ -52,14 +63,19 @@ var InstagramData = React.createClass({
       if (urls.length > 1) {
         newPrevUrl = urls[urls.length - 2];
       }
-      this.fetchImages(newUrl, newPrevUrl);
+      this.fetchImages({url: newUrl, previousUrl: newPrevUrl});
     } else {
       this.fetchImages();
     }
   },
   loadNextPage: function(e) {
     e.preventDefault();
-    this.fetchImages(this.state.nextUrl, this.state.currentUrl);
+    this.fetchImages({url: this.state.nextUrl,
+                      previousUrl: this.state.currentUrl});
+  },
+  onUserChange: function(userID) {
+    console.log('loading user ID', userID);
+    this.fetchImages({userID: userID});
   },
   render: function() {
     return (
@@ -69,7 +85,7 @@ var InstagramData = React.createClass({
             <a href="/#/" className="brand-logo center cyan-text text-darken-2">
               Instavibrant
             </a>
-            <UserDetails />
+            <UserDetails currentUserID={this.state.userID} onUserChange={this.onUserChange} />
           </div>
         </nav>
         <div className="container">

@@ -31,6 +31,29 @@ body {
   }
 }
 
+#follows-dropdown {
+  width: 200px !important;
+  right: 82px;
+  left: auto !important;
+  overflow-x: hidden;
+
+  &.dropdown-content li > a,
+  &.dropdown-content li > span {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .follow-list-item {
+    &.self {
+      border-bottom: 1px solid #ccc;
+    }
+
+    &.active {
+      background-color: color('teal', 'lighten-4');
+    }
+  }
+}
+
 .instagram-user {
   .logout-link {
     display: inline-block;

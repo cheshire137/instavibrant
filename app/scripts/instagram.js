@@ -15,13 +15,7 @@ var Instagram = (function() {
         url += (url.indexOf('?') < 0 ? '?' : '&') + 'access_token=' +
                LocalStorage.get('token');
       }
-      return $.ajax({
-        method: 'GET',
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        jsonpCallback: 'jsonpcallback',
-        url: url
-      });
+      return $.ajax({method: 'GET', dataType: 'jsonp', url: url});
     },
     getFeed: function() {
       return this.getJSON('/users/self/feed');
@@ -33,6 +27,7 @@ var Instagram = (function() {
       if (!url || typeof url === 'undefined') {
         url = '/users/' + userId + '/media/recent';
       }
+      console.log('GET', url);
       return $.Deferred(function(defer) {
         var onSuccess = function(response, textStatus, request) {
           response.pagination = response.pagination || {};
@@ -62,6 +57,12 @@ var Instagram = (function() {
         userId = 'self';
       }
       return this.getJSON('/users/' + userId);
+    },
+    getFollows: function(userId) {
+      if (typeof userId === 'undefined') {
+        userId = 'self';
+      }
+      return this.getJSON('/users/' + userId + '/follows');
     }
   };
 })();
