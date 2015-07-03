@@ -15,8 +15,6 @@ var source = require('vinyl-source-stream'),
     sourceFile = './app/scripts/app.js',
     destFolder = './dist/scripts',
     destFileName = 'app.js';
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
 
 // Styles
 gulp.task('styles', ['sass']);
@@ -57,10 +55,7 @@ function rebundle() {
   return bundler.bundle() // log errors if they happen
                 .on('error', $.util.log.bind($.util, 'Browserify Error'))
                 .pipe(source(destFileName))
-                .pipe(gulp.dest(destFolder))
-                .on('end', function() {
-                  reload();
-                });
+                .pipe(gulp.dest(destFolder));
 }
 
 // Scripts
@@ -146,19 +141,10 @@ gulp.task('extras', function() {
 
 // Watch
 gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
-  browserSync({
-    notify: false,
-    logPrefix: 'BS',
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
-    server: ['dist', 'app']
-  });
   gulp.watch('app/scripts/**/*.json', ['json']);
   gulp.watch('app/*.html', ['html']);
-  gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', reload]);
-  gulp.watch('app/images/**/*', reload);
+  gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles']);
+  gulp.watch('app/images/**/*');
 });
 
 // Build
