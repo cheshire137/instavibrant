@@ -2,6 +2,7 @@ $roboto-font-path: "../fonts/";
 $icons-font-path: "../fonts/";
 @import "materialize/sass/materialize";
 
+$avatar-height: 30px;
 $color-transition: color 0.2s ease-in-out;
 
 a {
@@ -24,6 +25,33 @@ body {
 .container {
   &.login {
     padding-top: 40px;
+  }
+}
+
+.instagram-user {
+  .logout-link {
+    display: inline-block;
+    height: $avatar-height;
+    line-height: $avatar-height;
+  }
+
+  .name-and-avatar {
+    display: inline-block;
+    height: $avatar-height;
+
+    .avatar {
+      max-height: $avatar-height;
+      border-radius: 100%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .name {
+      line-height: $avatar-height;
+      vertical-align: middle;
+      margin-left: 10px;
+      display: inline-block;
+    }
   }
 }
 
