@@ -27,7 +27,6 @@ var Instagram = (function() {
       if (!url || typeof url === 'undefined') {
         url = '/users/' + userId + '/media/recent';
       }
-      console.log('GET', url);
       return $.Deferred(function(defer) {
         var onSuccess = function(response, textStatus, request) {
           response.pagination = response.pagination || {};
