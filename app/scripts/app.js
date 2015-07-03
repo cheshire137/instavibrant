@@ -1,44 +1,54 @@
-
 var React = window.React = require('react'),
-    Timer = require("./ui/Timer"),
-    mountNode = document.getElementById("app");
+    Router = require('react-router'),
+    Index = require('./index'),
+    AuthFailure = require('./authFailure'),
+    Auth = require('./auth'),
+    mountNode = document.getElementById('app'),
+    Logout = require('./logout'),
+    InstagramData = require('./instagramData'),
+    NotFound = require('./notFound');
+var {
+  Route,
+  DefaultRoute,
+  NotFoundRoute,
+  RouteHandler,
+  Link
+} = Router;
 
-var TodoList = React.createClass({
-  render: function() {
-    var createItem = function(itemText) {
-      return <li>{itemText}</li>;
-    };
-    return <ul>{this.props.items.map(createItem)}</ul>;
-  }
-});
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {items: [], text: ''};
-  },
-  onChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextItems = this.state.items.concat([this.state.text]);
-    var nextText = '';
-    this.setState({items: nextItems, text: nextText});
-  },
+var InstavibrantApp = React.createClass({
   render: function() {
     return (
       <div>
-        <h3>TODO</h3>
-        <TodoList items={this.state.items} />
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
-          <button>{'Add #' + (this.state.items.length + 1)}</button>
-        </form>
-        <Timer />
+        <RouteHandler/>
       </div>
     );
   }
 });
 
 
-React.render(<TodoApp />, mountNode);
+// http://localhost:3001/#/access_token=194810857.4c50573.11633f6a266a48e6bb0110f52414ee77
+var routes = (
+  <Route handler={InstavibrantApp} path="/">
+    <DefaultRoute handler={Index} />
+    <Route name="authFailure" path="failed-auth" handler={AuthFailure}/>
+    <Route name="auth" path="access_token=:token" handler={Auth}/>
+    <Route name="instagram" path="instagram" handler={InstagramData}/>
+    <Route name="logout" path="logout" handler={Logout}/>
+    <NotFoundRoute handler={NotFound}/>
+  </Route>
+);
 
+Router.run(routes, function(Handler) {
+  var onConfigLoaded = function() {
+    React.render(<Handler/>, mountNode);
+  };
+  if (window.Config) {
+    onConfigLoaded();
+  } else {
+    $.get('scripts/config.json', function(Config) {
+      window.Config = Config;
+      console.log('loaded config', window.Config);
+      onConfigLoaded();
+    });
+  }
+});
