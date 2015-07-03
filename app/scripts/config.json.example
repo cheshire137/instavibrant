@@ -1,7 +1,8 @@
 {
   "localStorageKey": "instavibrant",
+  "serverUrl": "http://localhost:5000",
   "instagram": {
     "clientId": "YOUR_CLIENT_ID_HERE",
-    "redirectUri": "http://localhost:3001"
+    "redirectUri": "http://localhost:5000"
   }
 }

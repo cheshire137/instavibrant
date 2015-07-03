@@ -4,6 +4,7 @@ var React = require('react'),
 var ImageListItem = React.createClass({
   onImageLoad: function(e) {
     var img = $(e.target);
+    img.crossOrigin = 'Anonymous';
     var vibrant = new Vibrant(img.attr('src'));
     vibrant.getSwatches(function(err, swatches) {
       if (err) {
@@ -20,11 +21,12 @@ var ImageListItem = React.createClass({
   },
   render: function() {
     var thumbnail = this.props.image.images.thumbnail;
-    var url = '/image?url=' + encodeURIComponent(thumbnail.url);
+    var url = window.Config.serverUrl + '/image?url=' +
+              encodeURIComponent(thumbnail.url);
     return (
       <li className="image-list-item">
         <a href={this.props.image.link} target="_blank" className="image-link">
-          <img className="thumbnail" src={url} width={thumbnail.width} height={thumbnail.height} onLoad={this.onImageLoad} />
+          <img className="thumbnail" src={url} width={thumbnail.width} height={thumbnail.height} onLoad={this.onImageLoad} crossOrigin="anonymous" />
         </a>
       </li>
     );
