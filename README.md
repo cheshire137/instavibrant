@@ -33,3 +33,8 @@ Visit [localhost:5000](http://localhost:5000/) in your browser.
 ### After It Has Been Deployed Once
 
     ./deploy.sh
+
+## Thanks
+
+- [Vibrant.js](http://jariz.github.io/vibrant.js/) for color extraction.
+- [TinyColor](http://bgrins.github.io/TinyColor/) for determining darkness and lightness of colors.
