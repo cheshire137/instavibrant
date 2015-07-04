@@ -31,9 +31,12 @@ var ImageListItem = React.createClass({
     options.level = options.level || 'AA';
     options.size = options.size || 'small';
     var isBgDark = tinycolor(bg).isDark();
-    while (!tinycolor.isReadable(bg, text, options)) {
+    var attempts = 0;
+    var maxAttempts = 10;
+    while (!tinycolor.isReadable(bg, text, options) && attempts < maxAttempts) {
       text = isBgDark ? tinycolor(text).lighten().toString()
                       : tinycolor(text).darken().toString();
+      attempts++;
     }
     return text;
   },
