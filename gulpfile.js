@@ -1,17 +1,12 @@
 'use strict';
 
-var gulp = require('gulp');
-var del = require('del');
-
-
-var path = require('path');
-
-
-// Load plugins
-var $ = require('gulp-load-plugins')();
-var browserify = require('browserify');
-var watchify = require('watchify');
-var source = require('vinyl-source-stream'),
+var gulp = require('gulp'),
+    del = require('del'),
+    path = require('path'),
+    $ = require('gulp-load-plugins')(),
+    browserify = require('browserify'),
+    watchify = require('watchify'),
+    source = require('vinyl-source-stream'),
     sourceFile = './app/scripts/app.js',
     destFolder = './dist/scripts',
     destFileName = 'app.js';

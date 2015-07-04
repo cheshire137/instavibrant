@@ -1,7 +1,8 @@
 'use strict';
 var React = require('react'),
     Vibrant = require('node-vibrant'),
-    SwatchList = require('./swatchList');
+    SwatchList = require('./swatchList'),
+    tinycolor = require('tinycolor2');
 var ImageListItem = React.createClass({
   getInitialState: function() {
     return {swatches: []};
@@ -24,6 +25,55 @@ var ImageListItem = React.createClass({
       }
       this.setState({swatches: swatches});
     }.bind(this));
+  },
+  previewSwatches: function(e) {
+    e.preventDefault();
+    var link = $(e.target);
+    link.blur();
+    var defaultDark = '#333';
+    var defaultLight = '#F0F0F0';
+    var vibrant = this.state.swatches[0].hex;      // color 1
+    var muted = this.state.swatches[1].hex;        // color 2
+    var darkVibrant = this.state.swatches[2].hex;  // color 3
+    var darkMuted = this.state.swatches[3].hex;    // color 4
+    var lightVibrant = this.state.swatches[4].hex; // color 5
+    var bodyBg = muted || lightVibrant || darkMuted || darkVibrant || vibrant;
+    var bodyText = darkVibrant;
+    if (!bodyText) {
+      bodyText = tinycolor(bodyBg).isDark() ? defaultLight : defaultDark;
+    }
+    var linkColor = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
+    var headerBg = vibrant || darkMuted || lightVibrant || muted;
+    var headerText = darkVibrant;
+    if (!headerText) {
+      headerText = tinycolor(headerBg).isDark() ? defaultLight : defaultDark;
+    }
+    var footerBg = lightVibrant || darkMuted || darkVibrant || muted || vibrant;
+    var footerLink = darkMuted || darkVibrant;
+    var isFooterDark = tinycolor(footerBg).isDark();
+    if (!footerLink) {
+      footerLink = isFooterDark ? defaultLight : defaultDark;
+    }
+    var footerText;
+    if (isFooterDark) {
+      footerText = tinycolor(footerLink).lighten().toString();
+    } else {
+      footerText = tinycolor(footerLink).darken().toString();
+    }
+    $('body').css({'background-color': bodyBg, color: bodyText});
+    $('a').css('color', linkColor);
+    $('.nav-wrapper').style('background-color', headerBg, 'important');
+    $('.brand-logo').style('color', headerText, 'important');
+    $('.name-and-avatar').style('color', headerText, 'important');
+    $('.logout-link').style('color', headerText, 'important');
+    $('.page-footer').style('background-color', footerBg, 'important');
+    $('.page-footer a').each(function() {
+      this.style.setProperty('color', footerLink, 'important');
+    });
+    $('.page-footer li').each(function() {
+      this.style.setProperty('color', footerText, 'important');
+    });
+    $('.footer-copyright').style('color', footerText, 'important');
   },
   render: function() {
     var thumbnail = this.props.image.images.thumbnail;
@@ -48,6 +98,12 @@ var ImageListItem = React.createClass({
                 <a href={createPaletteUrl} className="create-palette-link" target="_blank">
                   <i className="mdi-action-open-in-new"></i>
                   Create palette
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={this.previewSwatches}>
+                  <i className="mdi-action-visibility"></i>
+                  Preview
                 </a>
               </li>
             </ul>

@@ -10156,14 +10156,21 @@ main {
   margin-top: 6px;
   font-size: 0.9rem;
 }
-.images-list-wrapper .images-list .image-list-item .image-details .image-options a, .images-list-wrapper .images-list .image-list-item .image-details .image-options a:link, .images-list-wrapper .images-list .image-list-item .image-details .image-options a:visited, .images-list-wrapper .images-list .image-list-item .image-details .image-options a:active {
+.images-list-wrapper .images-list .image-list-item .image-details .image-options li {
+  display: inline-block;
+  list-style: none;
+}
+.images-list-wrapper .images-list .image-list-item .image-details .image-options li a, .images-list-wrapper .images-list .image-list-item .image-details .image-options li a:link, .images-list-wrapper .images-list .image-list-item .image-details .image-options li a:visited, .images-list-wrapper .images-list .image-list-item .image-details .image-options li a:active {
   color: #888;
 }
-.images-list-wrapper .images-list .image-list-item .image-details .image-options a:hover, .images-list-wrapper .images-list .image-list-item .image-details .image-options a:focus {
+.images-list-wrapper .images-list .image-list-item .image-details .image-options li a:hover, .images-list-wrapper .images-list .image-list-item .image-details .image-options li a:focus {
   color: #26a69a;
 }
-.images-list-wrapper .images-list .image-list-item .image-details .image-options a.create-palette-link i {
+.images-list-wrapper .images-list .image-list-item .image-details .image-options li a i {
   margin-right: 5px;
+}
+.images-list-wrapper .images-list .image-list-item .image-details .image-options li + li {
+  margin-left: 1em;
 }
 .images-list-wrapper .images-list .image-list-item .image-details .swatches-list {
   font-weight: 300;
