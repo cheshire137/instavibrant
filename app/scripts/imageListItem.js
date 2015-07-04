@@ -42,14 +42,16 @@ var ImageListItem = React.createClass({
         <div className="image-details">
           {caption && caption.length > 0 ? <p className="caption">{{caption}}</p> : ''}
           <SwatchList image={this.props.image} swatches={this.state.swatches} />
-          <ul className="image-options">
-            <li>
-              <a href={createPaletteUrl} className="create-palette-link" target="_blank">
-                <i className="mdi-action-open-in-new"></i>
-                Create palette
-              </a>
-            </li>
-          </ul>
+          {this.state.swatches.length > 0 ? (
+            <ul className="image-options">
+              <li>
+                <a href={createPaletteUrl} className="create-palette-link" target="_blank">
+                  <i className="mdi-action-open-in-new"></i>
+                  Create palette
+                </a>
+              </li>
+            </ul>
+          ) : ''}
         </div>
       </li>
     );
