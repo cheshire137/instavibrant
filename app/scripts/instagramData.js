@@ -78,14 +78,16 @@ var InstagramData = React.createClass({
         this.state.userID !== 'self';
     return (
       <div>
-        <nav>
-          <div className="nav-wrapper cyan lighten-5">
-            <a href="/#/" className="brand-logo center cyan-text text-darken-2">
-              {otherUserLoaded ? 'Instavibrant: ' + this.state.userName : 'Instavibrant'}
-            </a>
-            <UserDetails currentUserID={this.state.userID} onUserChange={this.onUserChange} />
-          </div>
-        </nav>
+        <div className="navbar-fixed">
+          <nav>
+            <div className="nav-wrapper cyan lighten-5">
+              <a href="/#/" className="brand-logo center cyan-text text-darken-2">
+                {otherUserLoaded ? 'Instavibrant: ' + this.state.userName : 'Instavibrant'}
+              </a>
+              <UserDetails currentUserID={this.state.userID} onUserChange={this.onUserChange} />
+            </div>
+          </nav>
+        </div>
         <div className="container">
           <div className="images-list-wrapper">
             <ul className="images-list">

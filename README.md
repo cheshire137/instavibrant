@@ -37,4 +37,4 @@ Visit [localhost:5000](http://localhost:5000/) in your browser.
 ## Thanks
 
 - [Vibrant.js](http://jariz.github.io/vibrant.js/) for color extraction.
-- [TinyColor](http://bgrins.github.io/TinyColor/) for determining darkness and lightness of colors.
+- [TinyColor](http://bgrins.github.io/TinyColor/) for determining readability of colors.

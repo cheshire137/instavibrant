@@ -26,40 +26,63 @@ var ImageListItem = React.createClass({
       this.setState({swatches: swatches});
     }.bind(this));
   },
+  getReadableText: function(bg, text, options) {
+    options = options || {};
+    options.level = options.level || 'AA';
+    options.size = options.size || 'small';
+    var isBgDark = tinycolor(bg).isDark();
+    while (!tinycolor.isReadable(bg, text, options)) {
+      text = isBgDark ? tinycolor(text).lighten().toString()
+                      : tinycolor(text).darken().toString();
+    }
+    return text;
+  },
   previewSwatches: function(e) {
     e.preventDefault();
     var link = $(e.target);
     link.blur();
     var defaultDark = '#333';
     var defaultLight = '#F0F0F0';
-    var vibrant = this.state.swatches[0].hex;      // color 1
-    var muted = this.state.swatches[1].hex;        // color 2
-    var darkVibrant = this.state.swatches[2].hex;  // color 3
-    var darkMuted = this.state.swatches[3].hex;    // color 4
-    var lightVibrant = this.state.swatches[4].hex; // color 5
+    var numSwatches = this.state.swatches.length;
+    var vibrant = numSwatches > 0 ? this.state.swatches[0].hex : null;
+    var muted = numSwatches > 1 ? this.state.swatches[1].hex : null;
+    var darkVibrant = numSwatches > 2 ? this.state.swatches[2].hex : null;
+    var darkMuted = numSwatches > 3 ? this.state.swatches[3].hex : null;
+    var lightVibrant = numSwatches > 4 ? this.state.swatches[4].hex : null;
+
     var bodyBg = muted || lightVibrant || darkMuted || darkVibrant || vibrant;
     var bodyText = darkVibrant;
     if (!bodyText) {
       bodyText = tinycolor(bodyBg).isDark() ? defaultLight : defaultDark;
     }
+    bodyText = this.getReadableText(bodyBg, bodyText);
+
     var linkColor = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
+    linkColor = this.getReadableText(bodyBg, linkColor);
+
     var headerBg = vibrant || darkMuted || lightVibrant || muted;
     var headerText = darkVibrant;
     if (!headerText) {
       headerText = tinycolor(headerBg).isDark() ? defaultLight : defaultDark;
     }
+    headerText = this.getReadableText(headerBg, headerText, {size: 'large'});
+
     var footerBg = lightVibrant || darkMuted || darkVibrant || muted || vibrant;
-    var footerLink = darkMuted || darkVibrant;
+    var footerLink = muted || vibrant || darkVibrant || darkMuted;
     var isFooterDark = tinycolor(footerBg).isDark();
     if (!footerLink) {
       footerLink = isFooterDark ? defaultLight : defaultDark;
     }
+    footerLink = this.getReadableText(footerBg, footerLink);
+
     var footerText;
     if (isFooterDark) {
       footerText = tinycolor(footerLink).lighten().toString();
     } else {
       footerText = tinycolor(footerLink).darken().toString();
     }
+    footerText = this.getReadableText(footerBg, footerText);
+
     $('body').css({'background-color': bodyBg, color: bodyText});
     $('a').css('color', linkColor);
     $('.nav-wrapper').style('background-color', headerBg, 'important');
