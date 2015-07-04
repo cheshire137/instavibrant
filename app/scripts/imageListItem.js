@@ -44,6 +44,7 @@ var ImageListItem = React.createClass({
     var defaultDark = '#333';
     var defaultLight = '#F0F0F0';
     var numSwatches = this.state.swatches.length;
+
     var vibrant = numSwatches > 0 ? this.state.swatches[0].hex : null;
     var muted = numSwatches > 1 ? this.state.swatches[1].hex : null;
     var darkVibrant = numSwatches > 2 ? this.state.swatches[2].hex : null;
@@ -59,6 +60,10 @@ var ImageListItem = React.createClass({
 
     var linkColor = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
     linkColor = this.getReadableText(bodyBg, linkColor);
+
+    var dropdownBg = lightVibrant || muted || vibrant || darkMuted || darkVibrant;
+    var dropdownLink = darkVibrant || vibrant || darkMuted || muted || lightVibrant;
+    dropdownLink = this.getReadableText(dropdownBg, dropdownLink);
 
     var headerBg = vibrant || darkMuted || lightVibrant || muted;
     var headerText = darkVibrant;
@@ -85,6 +90,8 @@ var ImageListItem = React.createClass({
 
     $('body').css({'background-color': bodyBg, color: bodyText});
     $('a').css('color', linkColor);
+    $('.dropdown-content').css('background-color', dropdownBg);
+    $('.dropdown-content a').css('color', dropdownLink);
     $('.nav-wrapper').style('background-color', headerBg, 'important');
     $('.brand-logo').style('color', headerText, 'important');
     $('.name-and-avatar').style('color', headerText, 'important');

@@ -43,6 +43,12 @@ body {
     font-size: 1rem;
   }
 
+  &.dropdown-content li:hover,
+  &.dropdown-content li.active {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
   .follow-list-item {
     &.self {
       border-bottom: 1px solid #ccc;
