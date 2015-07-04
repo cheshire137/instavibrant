@@ -76,7 +76,7 @@ var InstagramData = React.createClass({
                       previousUrl: this.state.currentUrl});
   },
   onUserChange: function(userID, userName) {
-    console.log('loading user ID', userID, userName, 'wiping page history');
+    this.clearAppliedSwatches();
     this.setState({userName: userName, images: [], previousUrls: [],
                    userID: userID});
     this.fetchImages({userID: userID});

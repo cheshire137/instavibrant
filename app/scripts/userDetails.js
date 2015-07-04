@@ -40,7 +40,7 @@ var UserDetails = React.createClass({
       name = this.state.user.username;
     }
     var isAuthUserLoaded = !this.props.currentUserID ||
-        this.props.currentUserID === this.state.user.id;
+        this.props.currentUserID === 'self';
     return (
       <div>
         <ul id="follows-dropdown" className="dropdown-content">
