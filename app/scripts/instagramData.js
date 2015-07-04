@@ -46,9 +46,16 @@ var InstagramData = React.createClass({
   componentWillMount: function() {
     this.fetchImages();
   },
+  clearAppliedSwatches: function() {
+    $('body, a, .dropdown-content, .dropdown-content a, ' +
+      '.nav-wrapper, .brand-logo, .name-and-avatar, .logout-link, ' +
+      '.page-footer, .page-footer a, .page-footer li, ' +
+      '.footer-copyright').removeAttr('style');
+  },
   loadPreviousPage: function(e) {
     e.preventDefault();
     this.setState({images: []});
+    this.clearAppliedSwatches();
     var urls = this.state.previousUrls;
     if (urls.length > 0) {
       var newUrl = urls[urls.length - 1];
@@ -63,6 +70,7 @@ var InstagramData = React.createClass({
   },
   loadNextPage: function(e) {
     e.preventDefault();
+    this.clearAppliedSwatches();
     this.setState({images: []});
     this.fetchImages({url: this.state.nextUrl,
                       previousUrl: this.state.currentUrl});

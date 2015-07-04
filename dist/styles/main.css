@@ -10085,6 +10085,10 @@ body {
   padding: 0.5rem;
   font-size: 1rem;
 }
+#follows-dropdown.dropdown-content li:hover, #follows-dropdown.dropdown-content li.active {
+  background-color: transparent;
+  text-decoration: underline;
+}
 #follows-dropdown .follow-list-item.self {
   border-bottom: 1px solid #ccc;
 }
