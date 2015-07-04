@@ -64,8 +64,8 @@ var ImageListItem = React.createClass({
     var linkColor = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
     linkColor = this.getReadableText(bodyBg, linkColor);
 
-    var dropdownBg = lightVibrant || muted || vibrant || darkMuted || darkVibrant;
-    var dropdownLink = darkVibrant || vibrant || darkMuted || muted || lightVibrant;
+    var dropdownBg = darkMuted || muted || vibrant || lightVibrant || darkVibrant;
+    var dropdownLink = lightVibrant || vibrant || darkVibrant || darkMuted || muted;
     dropdownLink = this.getReadableText(dropdownBg, dropdownLink);
 
     var headerBg = vibrant || darkMuted || lightVibrant || muted;
