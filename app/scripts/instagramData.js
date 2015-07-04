@@ -78,7 +78,7 @@ var InstagramData = React.createClass({
   onUserChange: function(userID, userName) {
     this.clearAppliedSwatches();
     this.setState({userName: userName, images: [], previousUrls: [],
-                   userID: userID});
+                   userID: userID, nextUrl: null});
     this.fetchImages({userID: userID});
   },
   render: function() {
