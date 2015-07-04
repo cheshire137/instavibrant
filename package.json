@@ -38,6 +38,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "start": "foreman start -f Procfile.dev",
     "postinstall": "bower install",
     "test": "jest"
   },

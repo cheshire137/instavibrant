@@ -12,7 +12,7 @@ Update env.sh with your Instagram client's details.
 
     bundle install
     npm install
-    foreman start -f Procfile.dev
+    npm start
 
 Visit [localhost:5000](http://localhost:5000/) in your browser.
 
