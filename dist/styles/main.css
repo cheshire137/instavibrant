@@ -10161,13 +10161,21 @@ dd, dt {
   margin-top: 0;
 }
 .images-list-wrapper .images-list .image-list-item .image-details .css-colors-list {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dt {
   font-weight: 700;
 }
 .images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dt:after {
   content: ":";
+}
+.images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dt + dd + dt, .images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dt + dd + dt + dd {
+  margin-top: 5px;
+}
+.images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dd {
+  padding: 1px 2px;
+  border-radius: 2px;
 }
 .images-list-wrapper .images-list .image-list-item .image-details .image-options {
   margin-top: 6px;
@@ -10266,20 +10274,28 @@ dd, dt {
 @media (min-width: 768px) {
   .css-colors-list dt {
     float: left;
-    width: 12em;
     overflow: hidden;
     clear: left;
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .css-colors-list dd {
-    margin-left: 13em;
-  }
   .css-colors-list.first-column, .css-colors-list.second-column {
     float: left;
   }
+  .css-colors-list.first-column dt {
+    width: 10.5em;
+  }
+  .css-colors-list.first-column dd {
+    margin-left: 11.5em;
+  }
   .css-colors-list.second-column {
     margin-left: 2em;
+  }
+  .css-colors-list.second-column dt {
+    width: 12em;
+  }
+  .css-colors-list.second-column dd {
+    margin-left: 13em;
   }
 }

@@ -134,7 +134,8 @@ dd, dt {
         }
 
         .css-colors-list {
-          margin: 0;
+          margin-top: 0;
+          margin-bottom: 0;
 
           dt {
             font-weight: 700;
@@ -142,6 +143,16 @@ dd, dt {
             &:after {
               content: ":";
             }
+
+            & + dd + dt,
+            & + dd + dt + dd {
+              margin-top: 5px;
+            }
+          }
+
+          dd {
+            padding: 1px 2px;
+            border-radius: 2px;
           }
         }
 
@@ -261,7 +272,6 @@ dd, dt {
   .css-colors-list {
     dt {
       float: left;
-      width: 12em;
       overflow: hidden;
       clear: left;
       text-align: right;
@@ -269,16 +279,30 @@ dd, dt {
       white-space: nowrap;
     }
 
-    dd {
-      margin-left: 13em;
-    }
-
     &.first-column, &.second-column {
       float: left;
     }
 
+    &.first-column {
+      dt {
+        width: 10.5em;
+      }
+
+      dd {
+        margin-left: 11.5em;
+      }
+    }
+
     &.second-column {
       margin-left: 2em;
+
+      dt {
+        width: 12em;
+      }
+
+      dd {
+        margin-left: 13em;
+      }
     }
   }
 }
