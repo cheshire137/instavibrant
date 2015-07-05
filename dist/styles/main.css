@@ -10135,6 +10135,10 @@ main {
   padding: 0.2em 0;
 }
 
+dd, dt {
+  line-height: 1.42857143;
+}
+
 .images-list-wrapper .images-list .image-list-item {
   list-style: none;
   margin-top: 20px;
@@ -10155,6 +10159,15 @@ main {
 }
 .images-list-wrapper .images-list .image-list-item .image-details .caption {
   margin-top: 0;
+}
+.images-list-wrapper .images-list .image-list-item .image-details .css-colors-list {
+  margin: 0;
+}
+.images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dt {
+  font-weight: 700;
+}
+.images-list-wrapper .images-list .image-list-item .image-details .css-colors-list dt:after {
+  content: ":";
 }
 .images-list-wrapper .images-list .image-list-item .image-details .image-options {
   margin-top: 6px;
@@ -10250,3 +10263,23 @@ main {
 }
 
 /* IE7 */
+@media (min-width: 768px) {
+  .css-colors-list dt {
+    float: left;
+    width: 12em;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .css-colors-list dd {
+    margin-left: 13em;
+  }
+  .css-colors-list.first-column, .css-colors-list.second-column {
+    float: left;
+  }
+  .css-colors-list.second-column {
+    margin-left: 2em;
+  }
+}

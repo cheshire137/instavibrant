@@ -81,6 +81,9 @@ var InstagramData = React.createClass({
                    userID: userID, nextUrl: null});
     this.fetchImages({userID: userID});
   },
+  onImagePreview: function(image) {
+    this.setState({activeImageID: image.id});
+  },
   render: function() {
     var otherUserLoaded = this.state.userName && this.state.userID &&
         this.state.userID !== 'self';
@@ -100,8 +103,8 @@ var InstagramData = React.createClass({
           <div className="images-list-wrapper">
             <ul className="images-list">
               {this.state.images.map(function(image) {
-                return <ImageListItem key={'image-' + image.id} image={image} />;
-              })}
+                return <ImageListItem key={'image-' + image.id} isActive={this.state.activeImageID === image.id} onPreview={this.onImagePreview} image={image} />;
+              }.bind(this))}
             </ul>
             <p className="pagination-wrapper clearfix">
               {this.state.previousUrls.length > 0 ? (

@@ -61,8 +61,8 @@ var ImageListItem = React.createClass({
     }
     bodyText = this.getReadableText(bodyBg, bodyText);
 
-    var linkColor = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
-    linkColor = this.getReadableText(bodyBg, linkColor);
+    var bodyLink = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
+    bodyLink = this.getReadableText(bodyBg, bodyLink);
 
     var dropdownBg = darkMuted || muted || vibrant || lightVibrant || darkVibrant;
     var dropdownLink = lightVibrant || vibrant || darkVibrant || darkMuted || muted;
@@ -92,7 +92,7 @@ var ImageListItem = React.createClass({
     footerText = this.getReadableText(footerBg, footerText);
 
     $('body').css({'background-color': bodyBg, color: bodyText});
-    $('a').css('color', linkColor);
+    $('a').css('color', bodyLink);
     $('.dropdown-content').css('background-color', dropdownBg);
     $('.dropdown-content a').css('color', dropdownLink);
     $('.nav-wrapper').style('background-color', headerBg, 'important');
@@ -107,6 +107,29 @@ var ImageListItem = React.createClass({
       this.style.setProperty('color', footerText, 'important');
     });
     $('.footer-copyright').style('color', footerText, 'important');
+
+    this.setState({
+      cssColors: {
+        footerLink: footerLink,
+        footerText: footerText,
+        footerBg: footerBg,
+        headerText: headerText,
+        headerBg: headerBg,
+        dropdownBg: dropdownBg,
+        dropdownLink: dropdownLink,
+        bodyLink: bodyLink,
+        bodyText: bodyText,
+        bodyBg: bodyBg
+      }
+    });
+    this.props.onPreview(this.props.image);
+  },
+  getCssColorStyle: function(property) {
+    var color = this.state.cssColors[property];
+    return {
+      'background-color': color,
+      color: tinycolor(color).isDark() ? '#F0F0F0' : '#333'
+    };
   },
   render: function() {
     var thumbnail = this.props.image.images.thumbnail;
@@ -140,6 +163,54 @@ var ImageListItem = React.createClass({
                 </a>
               </li>
             </ul>
+          ) : ''}
+          {this.props.isActive ? (
+            <div className="clearfix">
+              <dl className="css-colors-list first-column">
+                <dt>Body background</dt>
+                <dd style={this.getCssColorStyle('bodyBg')}>
+                  {this.state.cssColors.bodyBg}
+                </dd>
+                <dt>Body text</dt>
+                <dd style={this.getCssColorStyle('bodyText')}>
+                  {this.state.cssColors.bodyText}
+                </dd>
+                <dt>Links</dt>
+                <dd style={this.getCssColorStyle('bodyLink')}>
+                  {this.state.cssColors.bodyLink}
+                </dd>
+                <dt>Header background</dt>
+                <dd style={this.getCssColorStyle('headerBg')}>
+                  {this.state.cssColors.headerBg}
+                </dd>
+                <dt>Header text</dt>
+                <dd style={this.getCssColorStyle('headerText')}>
+                  {this.state.cssColors.headerText}
+                </dd>
+              </dl>
+              <dl className="css-colors-list second-column">
+                <dt>Footer background</dt>
+                <dd style={this.getCssColorStyle('footerBg')}>
+                  {this.state.cssColors.footerBg}
+                </dd>
+                <dt>Footer text</dt>
+                <dd style={this.getCssColorStyle('footerText')}>
+                  {this.state.cssColors.footerText}
+                </dd>
+                <dt>Footer links</dt>
+                <dd style={this.getCssColorStyle('footerLink')}>
+                  {this.state.cssColors.footerLink}
+                </dd>
+                <dt>Dropdown background</dt>
+                <dd style={this.getCssColorStyle('dropdownBg')}>
+                  {this.state.cssColors.dropdownBg}
+                </dd>
+                <dt>Dropdown links</dt>
+                <dd style={this.getCssColorStyle('dropdownLink')}>
+                  {this.state.cssColors.dropdownLink}
+                </dd>
+              </dl>
+            </div>
           ) : ''}
         </div>
       </li>

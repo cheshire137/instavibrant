@@ -103,6 +103,10 @@ main {
   padding: 0.2em 0;
 }
 
+dd, dt {
+  line-height: 1.42857143;
+}
+
 .images-list-wrapper {
   .images-list {
     .image-list-item {
@@ -127,6 +131,18 @@ main {
 
         .caption {
           margin-top: 0;
+        }
+
+        .css-colors-list {
+          margin: 0;
+
+          dt {
+            font-weight: 700;
+
+            &:after {
+              content: ":";
+            }
+          }
         }
 
         .image-options {
@@ -240,3 +256,29 @@ main {
 }
 * html .clearfix             { zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+@media (min-width: 768px) {
+  .css-colors-list {
+    dt {
+      float: left;
+      width: 12em;
+      overflow: hidden;
+      clear: left;
+      text-align: right;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    dd {
+      margin-left: 13em;
+    }
+
+    &.first-column, &.second-column {
+      float: left;
+    }
+
+    &.second-column {
+      margin-left: 2em;
+    }
+  }
+}
