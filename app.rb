@@ -46,8 +46,9 @@ get '/image' do
   unless url.start_with?('http://') || url.start_with?('https://')
     return 'Invalid URL'
   end
-  unless url.include?('cdninstagram.com')
-    return 'Only cdninstagram.com URLs are allowed'
+  # Some of my Instagram image thumbnails were on igsonar.com
+  unless url.include?('cdninstagram.com') || url.include?('igsonar.com')
+    return "Only Instagram URLs are allowed, you gave #{url}"
   end
   uri = URI.parse(url)
   http = Net::HTTP.new(uri.host, uri.port)
