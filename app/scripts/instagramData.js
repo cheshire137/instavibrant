@@ -81,8 +81,8 @@ var InstagramData = React.createClass({
                    userID: userID, nextUrl: null});
     this.fetchImages({userID: userID});
   },
-  onImagePreview: function(image) {
-    this.setState({activeImageID: image.id});
+  onImagePreview: function(imageID) {
+    this.setState({activeImageID: imageID});
   },
   render: function() {
     var otherUserLoaded = this.state.userName && this.state.userID &&

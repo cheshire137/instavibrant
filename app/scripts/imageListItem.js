@@ -44,39 +44,35 @@ var ImageListItem = React.createClass({
     e.preventDefault();
     var link = $(e.target);
     link.blur();
+
     var defaultDark = '#333';
     var defaultLight = '#F0F0F0';
     var numSwatches = this.state.swatches.length;
+    var hexes = this.state.swatches.map(function(swatch) { return swatch.hex; });
 
-    var vibrant = numSwatches > 0 ? this.state.swatches[0].hex : null;
-    var muted = numSwatches > 1 ? this.state.swatches[1].hex : null;
-    var darkVibrant = numSwatches > 2 ? this.state.swatches[2].hex : null;
-    var darkMuted = numSwatches > 3 ? this.state.swatches[3].hex : null;
-    var lightVibrant = numSwatches > 4 ? this.state.swatches[4].hex : null;
-
-    var bodyBg = muted || lightVibrant || darkMuted || darkVibrant || vibrant;
-    var bodyText = darkVibrant;
+    var bodyBg = hexes[1] || hexes[4] || hexes[3] || hexes[2] || hexes[0];
+    var bodyText = hexes[2];
     if (!bodyText) {
       bodyText = tinycolor(bodyBg).isDark() ? defaultLight : defaultDark;
     }
     bodyText = this.getReadableText(bodyBg, bodyText);
 
-    var bodyLink = darkMuted || vibrant || muted || lightVibrant || darkVibrant;
+    var bodyLink = hexes[3] || hexes[0] || hexes[1] || hexes[4] || hexes[2];
     bodyLink = this.getReadableText(bodyBg, bodyLink);
 
-    var dropdownBg = darkMuted || muted || vibrant || lightVibrant || darkVibrant;
-    var dropdownLink = lightVibrant || vibrant || darkVibrant || darkMuted || muted;
+    var dropdownBg = hexes[3] || hexes[1] || hexes[0] || hexes[4] || hexes[2];
+    var dropdownLink = hexes[4] || hexes[0] || hexes[2] || hexes[3] || hexes[1];
     dropdownLink = this.getReadableText(dropdownBg, dropdownLink);
 
-    var headerBg = vibrant || darkMuted || lightVibrant || muted;
-    var headerText = darkVibrant;
+    var headerBg = hexes[0] || hexes[3] || hexes[4] || hexes[1];
+    var headerText = hexes[2];
     if (!headerText) {
       headerText = tinycolor(headerBg).isDark() ? defaultLight : defaultDark;
     }
     headerText = this.getReadableText(headerBg, headerText, {size: 'large'});
 
-    var footerBg = lightVibrant || darkMuted || darkVibrant || muted || vibrant;
-    var footerLink = muted || vibrant || darkVibrant || darkMuted;
+    var footerBg = hexes[4] || hexes[3] || hexes[2] || hexes[1] || hexes[0];
+    var footerLink = hexes[1] || hexes[0] || hexes[2] || hexes[3];
     var isFooterDark = tinycolor(footerBg).isDark();
     if (!footerLink) {
       footerLink = isFooterDark ? defaultLight : defaultDark;
@@ -91,38 +87,37 @@ var ImageListItem = React.createClass({
     }
     footerText = this.getReadableText(footerBg, footerText);
 
-    $('body').css({'background-color': bodyBg, color: bodyText});
-    $('a').css('color', bodyLink);
-    $('.dropdown-content').css('background-color', dropdownBg);
-    $('.dropdown-content a').css('color', dropdownLink);
-    $('.nav-wrapper').style('background-color', headerBg, 'important');
-    $('.brand-logo').style('color', headerText, 'important');
-    $('.name-and-avatar').style('color', headerText, 'important');
-    $('.logout-link').style('color', headerText, 'important');
-    $('.page-footer').style('background-color', footerBg, 'important');
+    this.applyCssColors({footerLink: footerLink, footerText: footerText,
+                         footerBg: footerBg, headerText: headerText,
+                         headerBg: headerBg, dropdownBg: dropdownBg,
+                         dropdownLink: dropdownLink, bodyLink: bodyLink,
+                         bodyText: bodyText, bodyBg: bodyBg});
+
+    // var listItem = link.closest('.image-list-item');
+    // var fromTop = listItem.offset().top - $('.nav-wrapper').outerHeight() -
+    //               $('.page-footer').outerHeight() - 32;
+    // $('html, body').animate({scrollTop: fromTop}, 750);
+  },
+  applyCssColors: function(colors) {
+    $('body').css({'background-color': colors.bodyBg, color: colors.bodyText});
+    $('a').css('color', colors.bodyLink);
+    $('.dropdown-content').css('background-color', colors.dropdownBg);
+    $('.dropdown-content a').css('color', colors.dropdownLink);
+    $('.nav-wrapper').style('background-color', colors.headerBg, 'important');
+    $('.brand-logo').style('color', colors.headerText, 'important');
+    $('.name-and-avatar').style('color', colors.headerText, 'important');
+    $('.logout-link').style('color', colors.headerText, 'important');
+    $('.page-footer').style('background-color', colors.footerBg, 'important');
     $('.page-footer a').each(function() {
-      this.style.setProperty('color', footerLink, 'important');
+      this.style.setProperty('color', colors.footerLink, 'important');
     });
     $('.page-footer li').each(function() {
-      this.style.setProperty('color', footerText, 'important');
+      this.style.setProperty('color', colors.footerText, 'important');
     });
-    $('.footer-copyright').style('color', footerText, 'important');
+    $('.footer-copyright').style('color', colors.footerText, 'important');
 
-    this.setState({
-      cssColors: {
-        footerLink: footerLink,
-        footerText: footerText,
-        footerBg: footerBg,
-        headerText: headerText,
-        headerBg: headerBg,
-        dropdownBg: dropdownBg,
-        dropdownLink: dropdownLink,
-        bodyLink: bodyLink,
-        bodyText: bodyText,
-        bodyBg: bodyBg
-      }
-    });
-    this.props.onPreview(this.props.image);
+    this.setState({cssColors: colors});
+    this.props.onPreview(this.props.image.id);
   },
   getCssColorStyle: function(property) {
     var color = this.state.cssColors[property];
