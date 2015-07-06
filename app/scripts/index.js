@@ -30,8 +30,8 @@ var Index = React.createClass({
           <div className="row">
             <div className="col s6 offset-s3">
               <p className="center">
-                Get colors from your Instagram photos
-                using <a href="http://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a>.
+                Get colors from your Instagram photos using
+                <a href="http://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a>.
               </p>
               <p className="center">
                 <a className="light-blue accent-3 waves-effect waves-light btn-large" href={this.state.authUrl}>

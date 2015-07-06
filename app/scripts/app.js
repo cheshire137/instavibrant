@@ -40,6 +40,12 @@ var routes = (
 
 Router.run(routes, function(Handler) {
   var onConfigLoaded = function() {
+    if (window.Config.https && window.location.protocol !== 'https:') {
+      console.log('forcing https');
+      window.location.href = 'https:' + window.location.href.
+          substring(window.location.protocol.length);
+      return;
+    }
     React.render(<Handler/>, mountNode);
   };
   if (window.Config) {

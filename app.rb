@@ -29,7 +29,8 @@ get '/config.json' do
     instagram: {
       clientId: ENV['INSTAGRAM_CLIENT_ID'],
       redirectUri: ENV['FRONT_END_URI']
-    }
+    },
+    https: ENV['FRONT_END_URI'].start_with?('https')
   }.to_json
 end
 
