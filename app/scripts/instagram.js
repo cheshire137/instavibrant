@@ -29,6 +29,10 @@ var Instagram = (function() {
       }
       return $.Deferred(function(defer) {
         var onSuccess = function(response, textStatus, request) {
+          if (response.meta && response.meta.error_type) {
+            defer.reject(response.meta);
+            return;
+          }
           response.pagination = response.pagination || {};
           response.pagination.current_url = url;
           defer.resolve(response);

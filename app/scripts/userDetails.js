@@ -1,13 +1,20 @@
 'use strict';
 var Instagram = require('./instagram'),
     React = require('react'),
-    LocalStorage = require('./localStorage');
+    LocalStorage = require('./localStorage'),
+    Router = require('react-router');
 var UserDetails = React.createClass({
+  mixins: [Router.Navigation],
   getInitialState: function() {
     return {user: {}, follows: []};
   },
   fetchUser: function() {
     Instagram.getUser().then(function(userData) {
+      if (userData.meta &&
+          userData.meta.error_type === 'OAuthAccessTokenException') {
+        this.transitionTo('logout');
+        return;
+      }
       LocalStorage.set('user', userData.data.id);
       this.setState({user: userData.data});
     }.bind(this), function() {
@@ -16,6 +23,11 @@ var UserDetails = React.createClass({
   },
   fetchFollowed: function() {
     Instagram.getFollows().then(function(response) {
+      if (response.meta &&
+          response.meta.error_type === 'OAuthAccessTokenException') {
+        this.transitionTo('logout');
+        return;
+      }
       console.log('loaded', response.data.length, 'followed users');
       this.setState({follows: response.data});
       $('.dropdown-button').dropdown();
