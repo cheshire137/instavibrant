@@ -3,8 +3,10 @@ var React = require('react'),
     Instagram = require('./instagram'),
     ImageListItem = require('./imageListItem'),
     UserDetails = require('./userDetails'),
-    LocalStorage = require('./localStorage');
+    LocalStorage = require('./localStorage'),
+    Router = require('react-router');
 var InstagramData = React.createClass({
+  mixins: [Router.Navigation],
   getInitialState: function() {
     return {images: [], previousUrls: []};
   },
@@ -44,6 +46,11 @@ var InstagramData = React.createClass({
     });
   },
   componentWillMount: function() {
+    var token = LocalStorage.get('token');
+    if (!token) {
+      this.transitionTo('logout');
+      return;
+    }
     this.fetchImages();
   },
   clearAppliedSwatches: function() {

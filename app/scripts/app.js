@@ -25,7 +25,6 @@ var InstavibrantApp = React.createClass({
   }
 });
 
-
 // http://localhost:3001/#/access_token=194810857.4c50573.11633f6a266a48e6bb0110f52414ee77
 var routes = (
   <Route handler={InstavibrantApp} path="/">
