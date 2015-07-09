@@ -54,7 +54,7 @@ var InstagramData = React.createClass({
     this.fetchImages();
   },
   clearAppliedSwatches: function() {
-    $('body, a, .dropdown-content, .dropdown-content a, ' +
+    $('body, a:not(.swatch), .dropdown-content, .dropdown-content a, ' +
       '.nav-wrapper, .brand-logo, .name-and-avatar, .logout-link, ' +
       '.page-footer, .page-footer a, .page-footer li, ' +
       '.footer-copyright').removeAttr('style');

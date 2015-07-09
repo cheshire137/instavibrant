@@ -96,10 +96,10 @@ var ImageListItem = React.createClass({
     footerText = this.getReadableText(footerBg, footerText);
 
     return {footerLink: footerLink, footerText: footerText,
-                         footerBg: footerBg, headerText: headerText,
-                         headerBg: headerBg, dropdownBg: dropdownBg,
-                         dropdownLink: dropdownLink, bodyLink: bodyLink,
-                         bodyText: bodyText, bodyBg: bodyBg};
+            footerBg: footerBg, headerText: headerText,
+            headerBg: headerBg, dropdownBg: dropdownBg,
+            dropdownLink: dropdownLink, bodyLink: bodyLink,
+            bodyText: bodyText, bodyBg: bodyBg};
   },
   previewSwatches: function(e) {
     e.preventDefault();
@@ -120,9 +120,14 @@ var ImageListItem = React.createClass({
     this.setState({hexIndex: newIndex});
     this.applyCssColors(this.getCssColors(newIndex));
   },
+  setBodyBackground: function(index) {
+    var newIndex = index - 1;
+    this.setState({hexIndex: newIndex});
+    this.applyCssColors(this.getCssColors(newIndex));
+  },
   applyCssColors: function(colors) {
     $('body').css({'background-color': colors.bodyBg, color: colors.bodyText});
-    $('a').css('color', colors.bodyLink);
+    $('a:not(.swatch)').css('color', colors.bodyLink);
     $('.dropdown-content').css('background-color', colors.dropdownBg);
     $('.dropdown-content a').css('color', colors.dropdownLink);
     $('.nav-wrapper').style('background-color', colors.headerBg, 'important');
@@ -144,7 +149,7 @@ var ImageListItem = React.createClass({
   getCssColorStyle: function(property) {
     var color = this.state.cssColors[property];
     return {
-      'background-color': color,
+      backgroundColor: color,
       color: tinycolor(color).isDark() ? '#F0F0F0' : '#333'
     };
   },
@@ -158,6 +163,7 @@ var ImageListItem = React.createClass({
                              return swatch.hex.replace(/^#/, '');
                            }).join(',');
     var shuffleStyle = {display: this.props.isActive ? 'inline-block' : 'none'};
+    var previewStyle = {display: this.props.isActive ? 'none' : 'inline-block'};
     return (
       <li className="image-list-item clearfix">
         <a href={this.props.image.link} target="_blank" className="image-link">
@@ -165,7 +171,7 @@ var ImageListItem = React.createClass({
         </a>
         <div className="image-details">
           {caption && caption.length > 0 ? <p className="caption">{{caption}}</p> : ''}
-          <SwatchList image={this.props.image} swatches={this.state.swatches} />
+          <SwatchList onSwatchClick={this.setBodyBackground} image={this.props.image} swatches={this.state.swatches} />
           {this.state.swatches.length > 0 ? (
             <ul className="image-options">
               <li>
@@ -174,7 +180,7 @@ var ImageListItem = React.createClass({
                   Create palette
                 </a>
               </li>
-              <li>
+              <li style={previewStyle}>
                 <a href="#" onClick={this.previewSwatches}>
                   <i className="mdi-action-visibility"></i>
                   Preview
