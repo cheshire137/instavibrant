@@ -43,6 +43,9 @@ var UserDetails = React.createClass({
   onFollowClick: function(e) {
     e.preventDefault();
     var link = $(e.target);
+    if (!link.is('a')) {
+      link = link.closest('a');
+    }
     var userID = link.attr('data-id');
     var name = link.text();
     this.props.onUserChange(userID, name);

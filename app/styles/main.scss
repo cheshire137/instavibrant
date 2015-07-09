@@ -51,7 +51,7 @@ body {
 
   .follow-list-item {
     &.self {
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     }
 
     &.active {
