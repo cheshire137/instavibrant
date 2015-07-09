@@ -29,6 +29,7 @@ var UserDetails = React.createClass({
         return;
       }
       console.log('loaded', response.data.length, 'followed users');
+      console.log(response.data[0]);
       this.setState({follows: response.data});
       $('.dropdown-button').dropdown();
     }.bind(this), function() {
@@ -75,6 +76,7 @@ var UserDetails = React.createClass({
             return (
               <li key={'follow-' + follow.id} className={followClass}>
                 <a href="#" data-id={follow.id} onClick={this.onFollowClick}>
+                  <img src={follow.profile_picture} className="avatar" alt={follow.username}/>
                   {followName}
                 </a>
               </li>

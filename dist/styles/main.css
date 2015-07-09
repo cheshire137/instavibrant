@@ -10095,6 +10095,14 @@ body {
 #follows-dropdown .follow-list-item.active {
   background-color: #b2dfdb;
 }
+#follows-dropdown .follow-list-item .avatar {
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  top: 3px;
+  position: relative;
+}
 
 .instagram-user .logout-link {
   display: inline-block;
