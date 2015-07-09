@@ -3,17 +3,17 @@ $icons-font-path: "../fonts/";
 @import "materialize/sass/materialize";
 
 $avatar-height: 30px;
-$color-transition: color 0.1s ease-in-out;
+$all-transition: all 0.1s ease-in-out;
 $image-padding: 20px;
 $image-width: 150px;
 $swatch-height: 50px;
 
 a {
-  -webkit-transition: $color-transition;
-  -moz-transition: $color-transition;
-  -ms-transition: $color-transition;
-  -o-transition: $color-transition;
-  transition: $color-transition;
+  -webkit-transition: $all-transition;
+  -moz-transition: $all-transition;
+  -ms-transition: $all-transition;
+  -o-transition: $all-transition;
+  transition: $all-transition;
 }
 
 body {
