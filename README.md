@@ -1,6 +1,6 @@
 # Instavibrant
 
-![Screenshot](https://raw.githubusercontent.com/moneypenny/instavibrant/master/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/cheshire137/instavibrant/master/screenshot.png)
 
 ## How to Run Locally
 
