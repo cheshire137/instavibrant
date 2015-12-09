@@ -157,7 +157,10 @@ var ImageListItem = React.createClass({
     var thumbnail = this.props.image.images.thumbnail;
     var url = window.Config.serverUrl + '/image?url=' +
               encodeURIComponent(thumbnail.url);
-    var caption = this.props.image.caption ? this.props.image.caption.text : '';
+    var caption = '';
+    if (this.props.image.caption) {
+      caption = this.props.image.caption.text;
+    }
     var createPaletteUrl = 'http://www.colourlovers.com/palettes/add?colors=' +
                            this.state.swatches.map(function(swatch) {
                              return swatch.hex.replace(/^#/, '');
@@ -170,7 +173,9 @@ var ImageListItem = React.createClass({
           <img className="thumbnail" src={url} width={thumbnail.width} height={thumbnail.height} onLoad={this.onImageLoad} crossOrigin="anonymous" />
         </a>
         <div className="image-details">
-          {caption && caption.length > 0 ? <p className="caption">{{caption}}</p> : ''}
+          {caption.length > 0 ? (
+            <p className="caption">{caption}</p>
+          ) : ''}
           <SwatchList onSwatchClick={this.setBodyBackground} image={this.props.image} swatches={this.state.swatches} />
           {this.state.swatches.length > 0 ? (
             <ul className="image-options">

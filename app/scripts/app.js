@@ -1,4 +1,5 @@
 var React = window.React = require('react'),
+    ReactDOM = require('react-dom'),
     Router = require('react-router'),
     Index = require('./index'),
     AuthFailure = require('./authFailure'),
@@ -45,7 +46,7 @@ Router.run(routes, function(Handler) {
           substring(window.location.protocol.length);
       return;
     }
-    React.render(<Handler/>, mountNode);
+    ReactDOM.render(<Handler/>, mountNode);
   };
   if (window.Config) {
     onConfigLoaded();

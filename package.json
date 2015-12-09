@@ -1,6 +1,10 @@
 {
   "name": "instavibrant",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cheshire137/instavibrant.git"
+  },
   "dependencies": {
     "tinycolor2": "^1.1.2"
   },
@@ -23,6 +27,7 @@
     "node-vibrant": "^1.1.1",
     "jest-cli": "latest",
     "react": "latest",
+    "react-dom": "^0.14.3",
     "react-router": "^0.13.3",
     "react-tools": "latest",
     "reactify": "latest",

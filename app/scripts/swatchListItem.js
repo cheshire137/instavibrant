@@ -14,7 +14,7 @@ var SwatchListItem = React.createClass({
     return (
       <li className="swatch-list-item">
         <a href="#" onClick={this.onClick} className={className} title={hex} style={style}>
-          {{hex}}
+          {hex}
         </a>
       </li>
     );
